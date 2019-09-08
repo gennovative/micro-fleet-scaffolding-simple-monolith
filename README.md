@@ -1,37 +1,33 @@
-# RESTful Web Service for Event Check-in Application
+# Scafolding for simple monolith RESTful service with [MicroFleet](https://github.com/gennovative/micro-fleet) framework
 
-Exposes RESTful APIs for all admin page, welcomer application and guest starter application.
 
 ---
+## COMPILING SOURCE CODE
+
+- First of all, run `npm install`: To install dependencies.
+- Service settings can be customized in `src/app/configs.ts`
+- Run `npm run build` to transpile TypeScript to JavaScript, or `npm run watch` to keep watching and transpiling changes in files.
+- Run `npm run dev` to bootstrap the service in debug mode, errors are logged to console as well as returned to client-side.
+- Run `npm start` to start service in production mode, errors are not logged and client-side only receives validation errors.
+
 ## SETUP DATABASE
+This scafolding uses PostgreSQL as default, you can change database engine in `src/app/configs.ts`. If you don't already have PostgreSQL installed, the quickest way is run a Docker image:
 
-- `knex migrate:latest` to create tables for development.
-- `knex seed:run` to insert seed data.
+  ```bash
+  docker run -d -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres:11-alpine
+  ```
 
-- `knex migrate:latest -env testing` to create tables for unit testing.
+We use database migration file for more fine-grained control of table creation:
 
-To re-run migration, go to database then delete all rows in table `knex_migrations.`
+- `cd _database`
+- `npx knex migrate:latest` to create tables for development.
+- `npx knex seed:run` to insert seed data.
 
-## INSTALLATION
-
-`npm i`: To install dependencies.
-
-## TEST
-
-- Execute `npm start` to start web server.
-- Send a GET request to `http://localhost:3000/` to check if it works.
-
-## DEVELOPMENT
-
-- `npm run build` to transpile TypeScript then run unit tests (if any) (equiv. `npm run compile` + `npm run test` (if any)).
-- `npm run compile`: To transpile TypeScript into JavaScript.
-- `npm run watch`: To transpile without running unit tests, then watch for changes in *.ts files and re-transpile on save.
-- `npm run test`: To run unit tests.
-  * After tests finish, open file `/coverage/index.html` with a web browser to see the code coverage report which is mapped to TypeScript code.
+- To re-run migration, go to database then delete all rows in table `knex_migrations.`
 
 ## RELEASE
 
-- Jump to script folder: `cd ./docker`
+- Jump to script folder: `cd ./_docker`
 - Create Docker image: `sudo sh ./create-image.sh`
 - Deploy services to Docker swarm: `sudo sh ./deploy.sh`
 - Remove services from Docker swarm: `sudo sh ./undeploy.sh`

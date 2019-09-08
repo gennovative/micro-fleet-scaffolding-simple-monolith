@@ -1,6 +1,7 @@
 import { constants } from '@micro-fleet/common'
 
 const {
+    DbClient,
     Database: D,
     Service: S,
     Web: W,
@@ -8,7 +9,7 @@ const {
 
 export = {
     [S.SERVICE_SLUG]: 'monolith-simple-rest-server',
-    [D.DB_ENGINE]: 'pg',
+    [D.DB_ENGINE]: DbClient.POSTGRESQL,
     [D.DB_HOST]: 'localhost',
     [D.DB_USER]: 'postgres',
     [D.DB_PASSWORD]: 'postgres',
