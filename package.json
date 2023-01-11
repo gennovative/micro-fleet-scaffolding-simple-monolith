@@ -20,7 +20,7 @@
         "@types/debug": "~4.1",
         "@types/node": "~10.14",
         "cross-env": "~5.2",
-        "knex": "~0.19",
+        "knex": "~2.4",
         "nodemon": "~1.19",
         "pg": "~7.12",
         "rimraf": "~3.0",
